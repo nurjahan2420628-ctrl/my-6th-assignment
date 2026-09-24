@@ -29,7 +29,7 @@
 
 <p align="center">
 
-### 🚀 <a href="https://my-6th-assignment-mq9a.vercel.app/ " target="_blank">Visit FITLOG Live Demo</a>
+### 🚀 <a href="https://my-6th-assignment-mq9a.vercel.app/ ">Visit FITLOG Live Demo</a>
 
 </p>
 
