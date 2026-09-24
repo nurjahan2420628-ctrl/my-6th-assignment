@@ -110,28 +110,32 @@ export default function DetailPage() {
   );
 
   function handleAdd() {
-    const success =
-      addToPlan(currentWorkout);
+  if (!workout) return;
 
-    if (success) {
-      setToast("Added to today's plan");
-    } else if (plan.length >= 5) {
-      setToast("Your plan is full");
-    } else {
-      setToast("Already in your plan");
-    }
+  const success = addToPlan(workout);
+
+  if (success) {
+    setToast("Added to today's plan");
+  } else if (plan.length >= 5) {
+    setToast("Your plan is full");
+  } else {
+    setToast("Already in your plan");
   }
+}
 
-  function handleSave() {
-    const success =
-      saveForLater(currentWorkout);
+function handleSave() {
+  if (!workout) return;
 
-    setToast(
-      success
-        ? "Saved for later"
-        : "Already saved"
-    );
-  }
+  const success = saveForLater(workout);
+
+  setToast(
+    success
+      ? "Saved for later"
+      : "Already saved"
+  );
+}
+
+ 
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-14">
