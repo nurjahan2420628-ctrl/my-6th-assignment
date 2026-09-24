@@ -30,7 +30,7 @@ export function WorkoutCard({
           sizes="(max-width:768px) 100vw, 33vw"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent" />
 
         <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
           {w.muscleGroups.slice(0, 2).map((group) => (
