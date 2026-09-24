@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
 import { useEffect, useState } from "react";
 
 import {
@@ -21,18 +20,13 @@ import { useFitLog } from "@/components/fitlog-provider";
 import { Toast } from "@/components/toast";
 
 export default function DetailPage() {
-  const { id } = useParams<{
-    id: string;
-  }>();
+  const { id } = useParams<{ id: string }>();
 
   const [workout, setWorkout] =
     useState<Workout | null>(null);
 
-  const [loading, setLoading] =
-    useState(true);
-
-  const [toast, setToast] =
-    useState("");
+  const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState("");
 
   const {
     plan,
@@ -53,12 +47,10 @@ export default function DetailPage() {
             await response.json();
 
           setWorkout(result);
-
           return;
         }
 
-        const allResponse =
-          await fetch(API_URL);
+        const allResponse = await fetch(API_URL);
 
         const all: Workout[] =
           await allResponse.json();
@@ -103,6 +95,10 @@ export default function DetailPage() {
     );
   }
 
+  /*
+   * After the check above, workout cannot be null.
+   * This gives TypeScript a definite Workout type.
+   */
   const currentWorkout: Workout = workout;
 
   const inPlan = plan.some(
@@ -139,8 +135,6 @@ export default function DetailPage() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-14">
-
-     
       <Link
         href="/"
         className="mb-8 inline-flex items-center gap-2 text-xs font-bold text-white/45 hover:text-white"
@@ -150,10 +144,7 @@ export default function DetailPage() {
       </Link>
 
       <div className="grid overflow-hidden rounded-3xl border border-white/10 bg-[#0f1110] md:grid-cols-[.95fr_1.05fr]">
-
-      
         <div className="relative min-h-[420px] bg-black md:min-h-[680px]">
-
           <Image
             src={currentWorkout.image}
             alt={currentWorkout.name}
@@ -179,14 +170,13 @@ export default function DetailPage() {
           </div>
         </div>
 
-        
         <div className="p-6 md:p-10">
-
           <p className="text-xs font-black tracking-[.25em] text-[#ccff00]">
             WORKOUT DETAIL / #
-            {String(
-              currentWorkout.id
-            ).padStart(2, "0")}
+            {String(currentWorkout.id).padStart(
+              2,
+              "0"
+            )}
           </p>
 
           <h1 className="mt-3 font-display text-5xl leading-[.9] sm:text-7xl">
@@ -197,9 +187,7 @@ export default function DetailPage() {
             {currentWorkout.description}
           </p>
 
-         
           <div className="mt-8 grid grid-cols-2 overflow-hidden rounded-2xl border border-white/10 sm:grid-cols-3">
-
             <Stat
               title="EQUIPMENT"
               value={currentWorkout.equipment}
@@ -212,9 +200,7 @@ export default function DetailPage() {
 
             <Stat
               title="SETS"
-              value={String(
-                currentWorkout.sets
-              )}
+              value={String(currentWorkout.sets)}
             />
 
             <Stat
@@ -234,18 +220,12 @@ export default function DetailPage() {
 
             <Stat
               title="RATING"
-              value={String(
-                currentWorkout.rating
-              )}
+              value={String(currentWorkout.rating)}
             />
-
           </div>
 
-        
           <div className="mt-8">
-
             <div className="flex items-center gap-2">
-
               <ListChecks
                 size={18}
                 className="text-[#ccff00]"
@@ -254,45 +234,34 @@ export default function DetailPage() {
               <h2 className="font-display text-2xl">
                 INSTRUCTIONS
               </h2>
-
             </div>
 
             <ol className="mt-4 space-y-3">
-
               {currentWorkout.instructions.map(
                 (instruction, index) => (
                   <li
                     key={instruction}
                     className="flex gap-3 rounded-xl border border-white/5 bg-white/[.02] p-3 text-sm text-white/60"
                   >
-
                     <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/10 text-xs font-black text-white">
                       {index + 1}
                     </span>
 
                     {instruction}
-
                   </li>
                 )
               )}
-
             </ol>
-
           </div>
 
-         
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-
-            
             <button
               disabled={
-                inPlan ||
-                plan.length >= 5
+                inPlan || plan.length >= 5
               }
               onClick={handleAdd}
               className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-black text-black disabled:cursor-not-allowed disabled:opacity-40"
             >
-
               <Plus size={18} />
 
               {inPlan
@@ -300,10 +269,8 @@ export default function DetailPage() {
                 : plan.length >= 5
                 ? "PLAN FULL"
                 : "ADD TO TODAY'S PLAN"}
-
             </button>
 
-            
             <button
               onClick={handleSave}
               className={`flex flex-1 items-center justify-center gap-2 rounded-xl border px-5 py-3 text-sm font-black ${
@@ -312,28 +279,22 @@ export default function DetailPage() {
                   : "border-white/15 text-white"
               }`}
             >
-
               <Bookmark size={18} />
 
               {isSaved
                 ? "SAVED"
                 : "SAVE FOR LATER"}
-
             </button>
-
           </div>
-
         </div>
       </div>
 
-      
       {toast && (
         <Toast
           message={toast}
           onClose={() => setToast("")}
         />
       )}
-
     </section>
   );
 }
@@ -347,7 +308,6 @@ function Stat({
 }) {
   return (
     <div className="border-b border-r border-white/10 p-4">
-
       <p className="text-[9px] font-black tracking-widest text-white/35">
         {title}
       </p>
@@ -355,7 +315,6 @@ function Stat({
       <p className="mt-2 text-sm font-bold">
         {value}
       </p>
-
     </div>
   );
 }
