@@ -15,11 +15,7 @@
   <strong>FITLOG</strong> is a modern, responsive workout library and personal workout planning application designed to help users discover exercises, explore detailed workout information, and organize their daily fitness routine.
 </p>
 
-<p>
-  <a href="https://my-6th-assignment-mq9a.vercel.app/">
-    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Visit%20FITLOG-000000?style=for-the-badge" alt="Live Demo"/>
-  </a>
-</p>
+
 
 </div>
 
@@ -29,7 +25,7 @@
 
 <p align="center">
 
-### 🚀 <a href="https://my-6th-assignment-mq9a.vercel.app/ ">Visit FITLOG Live Demo</a>
+### 🚀 <a href="https://my-6th-assignment-mq9a.vercel.app/ ">FitLog Live Demo</a>
 
 </p>
 
