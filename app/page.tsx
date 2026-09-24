@@ -1,69 +1,197 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import { ChevronDown, Search, X } from "lucide-react";
+import { Hero } from "@/components/hero";
+import { WorkoutCard } from "@/components/workout-card";
+import type { Workout } from "@/types/workout";
+import { API_URL } from "@/lib/api";
+
+type SortOption = "duration" | "calories" | "rating";
 
 export default function Home() {
+  const [data, setData] = useState<Workout[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  
+  const [search, setSearch] = useState("");
+
+  
+  const [sortBy, setSortBy] = useState<SortOption>("duration");
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch workouts");
+        }
+
+        return response.json();
+      })
+      .then((result: Workout[]) => {
+       
+        const sortedWorkouts = [...result].sort(
+          (a, b) => a.id - b.id
+        );
+
+        setData(sortedWorkouts);
+      })
+      .catch((error) => {
+        console.error(error);
+        setData([]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  
+  const filteredData = data.filter((workout) => {
+    const query = search.toLowerCase().trim();
+
+    if (!query) {
+      return true;
+    }
+
+    const workoutName = workout.name.toLowerCase();
+
+    const muscleGroups = workout.muscleGroups
+      .join(" ")
+      .toLowerCase();
+
+    const equipment = workout.equipment.toLowerCase();
+
+    return (
+      workoutName.includes(query) ||
+      muscleGroups.includes(query) ||
+      equipment.includes(query)
+    );
+  });
+
+
+  const sortedData = [...filteredData].sort((a, b) => {
+    if (sortBy === "duration") {
+      return a.duration - b.duration;
+    }
+
+    if (sortBy === "calories") {
+      return a.caloriesBurned - b.caloriesBurned;
+    }
+
+    if (sortBy === "rating") {
+      return b.rating - a.rating;
+    }
+
+    return 0;
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Hero />
+
+      <section
+        id="library"
+        className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20"
+      >
+        
+        <div className="mb-8">
+          <h2 className="font-display text-5xl sm:text-6xl">
+            THE LIBRARY
+          </h2>
+
+          <p className="mt-2 text-sm text-white/45">
+            Choose a workout and start your session.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+
+        
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+
+          
+          <div className="relative w-full md:max-w-md">
+            <Search
+              size={18}
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/40"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search workouts or tags..."
+              className="w-full rounded-lg border border-white/10 bg-[#111312] py-3 pl-11 pr-10 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-[#ccff00]"
+            />
+
+           
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+              >
+                <X size={16} />
+              </button>
+            )}
+          </div>
+
+           
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-white/45">
+              Sort By
+            </span>
+
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) =>
+                  setSortBy(e.target.value as SortOption)
+                }
+                className="appearance-none rounded-lg border border-white/10 bg-[#111312] py-2.5 pl-4 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#ccff00]"
+              >
+                <option value="duration">Duration</option>
+                <option value="calories">Calories</option>
+                <option value="rating">Rating</option>
+              </select>
+
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50"
+              />
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+
+       
+        {loading ? (
+          <div className="py-20 text-center text-white/40">
+            Loading workouts...
+          </div>
+        ) : sortedData.length > 0 ? (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {sortedData.map((workout) => (
+              <WorkoutCard
+                key={workout.id}
+                w={workout}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-white/10 bg-[#111312] py-16 text-center">
+            <p className="text-white/50">
+              No workouts found.
+            </p>
+
+            {search && (
+              <button
+                onClick={() => setSearch("")}
+                className="mt-4 text-sm font-bold text-[#ccff00]"
+              >
+                Clear search
+              </button>
+            )}
+          </div>
+        )}
+      </section>
+    </>
   );
 }
