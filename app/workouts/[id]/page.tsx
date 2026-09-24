@@ -49,7 +49,8 @@ export default function DetailPage() {
         );
 
         if (response.ok) {
-          const result = await response.json();
+          const result: Workout =
+            await response.json();
 
           setWorkout(result);
 
@@ -102,16 +103,19 @@ export default function DetailPage() {
     );
   }
 
+  const currentWorkout: Workout = workout;
+
   const inPlan = plan.some(
-    (item) => item.id === workout.id
+    (item) => item.id === currentWorkout.id
   );
 
   const isSaved = saved.some(
-    (item) => item.id === workout.id
+    (item) => item.id === currentWorkout.id
   );
 
   function handleAdd() {
-    const success = addToPlan(workout);
+    const success =
+      addToPlan(currentWorkout);
 
     if (success) {
       setToast("Added to today's plan");
@@ -124,7 +128,7 @@ export default function DetailPage() {
 
   function handleSave() {
     const success =
-      saveForLater(workout);
+      saveForLater(currentWorkout);
 
     setToast(
       success
@@ -136,7 +140,7 @@ export default function DetailPage() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-14">
 
-      {/* Back to Library */}
+     
       <Link
         href="/"
         className="mb-8 inline-flex items-center gap-2 text-xs font-bold text-white/45 hover:text-white"
@@ -147,12 +151,12 @@ export default function DetailPage() {
 
       <div className="grid overflow-hidden rounded-3xl border border-white/10 bg-[#0f1110] md:grid-cols-[.95fr_1.05fr]">
 
-        {/* Workout Image */}
+      
         <div className="relative min-h-[420px] bg-black md:min-h-[680px]">
 
           <Image
-            src={workout.image}
-            alt={workout.name}
+            src={currentWorkout.image}
+            alt={currentWorkout.name}
             fill
             priority
             className="object-cover"
@@ -162,7 +166,7 @@ export default function DetailPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
 
           <div className="absolute bottom-6 left-6 flex flex-wrap gap-2">
-            {workout.muscleGroups.map(
+            {currentWorkout.muscleGroups.map(
               (group) => (
                 <span
                   key={group}
@@ -175,66 +179,69 @@ export default function DetailPage() {
           </div>
         </div>
 
-        {/* Workout Details */}
+        
         <div className="p-6 md:p-10">
 
           <p className="text-xs font-black tracking-[.25em] text-[#ccff00]">
             WORKOUT DETAIL / #
-            {String(workout.id).padStart(
-              2,
-              "0"
-            )}
+            {String(
+              currentWorkout.id
+            ).padStart(2, "0")}
           </p>
 
           <h1 className="mt-3 font-display text-5xl leading-[.9] sm:text-7xl">
-            {workout.name.toUpperCase()}
+            {currentWorkout.name.toUpperCase()}
           </h1>
 
           <p className="mt-6 max-w-2xl leading-7 text-white/50">
-            {workout.description}
+            {currentWorkout.description}
           </p>
 
-          {/* Workout Stats */}
+         
           <div className="mt-8 grid grid-cols-2 overflow-hidden rounded-2xl border border-white/10 sm:grid-cols-3">
 
             <Stat
               title="EQUIPMENT"
-              value={workout.equipment}
+              value={currentWorkout.equipment}
             />
 
             <Stat
               title="DIFFICULTY"
-              value={workout.difficulty}
+              value={currentWorkout.difficulty}
             />
 
             <Stat
               title="SETS"
-              value={String(workout.sets)}
+              value={String(
+                currentWorkout.sets
+              )}
             />
 
             <Stat
               title="REPS"
-              value={workout.reps}
+              value={currentWorkout.reps}
             />
 
             <Stat
               title="DURATION"
-              value={`${workout.duration} min`}
+              value={`${currentWorkout.duration} min`}
             />
 
             <Stat
               title="CALORIES"
-              value={`${workout.caloriesBurned} kcal`}
+              value={`${currentWorkout.caloriesBurned} kcal`}
             />
 
             <Stat
               title="RATING"
-              value={String(workout.rating)}
+              value={String(
+                currentWorkout.rating
+              )}
             />
 
           </div>
 
-          {/* Instructions */}
+        
           <div className="mt-8">
 
             <div className="flex items-center gap-2">
@@ -252,7 +259,7 @@ export default function DetailPage() {
 
             <ol className="mt-4 space-y-3">
 
-              {workout.instructions.map(
+              {currentWorkout.instructions.map(
                 (instruction, index) => (
                   <li
                     key={instruction}
@@ -273,10 +280,10 @@ export default function DetailPage() {
 
           </div>
 
-          {/* Action Buttons */}
+         
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
 
-            {/* Add to Plan */}
+            
             <button
               disabled={
                 inPlan ||
