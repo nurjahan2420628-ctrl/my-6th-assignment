@@ -1,50 +1,139 @@
-FITLOG
+<div align="center">
 
-A modern and responsive workout library and planning application built with Next.js. FITLOG allows users to discover workouts, search and sort exercises, view detailed workout information, and organize workouts into a personal daily plan.
+# 🏋️ FITLOG
 
-🛠️ Technologies Used
+### Find Your Workout. Build Your Plan. Get It Done.
 
-Next.js 16 – React framework for building the application
+<p>
+  <img src="https://img.shields.io/badge/Next.js-16.3.6-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/React-19.2.8-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React"/>
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS"/>
+</p>
 
-React 19 – Component-based user interface
+<p>
+  <strong>FITLOG</strong> is a modern, responsive workout library and personal workout planning application designed to help users discover exercises, explore detailed workout information, and organize their daily fitness routine.
+</p>
 
-TypeScript – Type-safe development
+<p>
+  <a href="https://my-6th-assignment-mq9a.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Visit%20FITLOG-000000?style=for-the-badge" alt="Live Demo"/>
+  </a>
+</p>
 
-Tailwind CSS 4 – Responsive styling and modern UI design
+</div>
 
-Lucide React – Icons and interface elements
+---
 
-REST API / Fetch API – Loading workout data dynamically
+## 🌐 Live Demo
 
-Next.js Image – Optimized workout images
+<p align="center">
 
-✨ Key Features
+### 🚀 <a href="https://my-6th-assignment-mq9a.vercel.app/">Visit FITLOG Live Demo</a>
 
-Workout Library
-Browse a collection of workouts in a responsive card-based library with workout information and ratings.
+</p>
 
-Search Workouts
-Search workouts by name, muscle group, or equipment to quickly find a suitable exercise.
+<p align="center">
+  Explore the deployed application and experience the workout library, search, sorting, workout details, and personal workout planning features.
+</p>
 
-Workout Sorting
-Sort workouts by duration, calories burned, or rating.
+---
 
-Detailed Workout Pages
-View complete workout details including description, equipment, difficulty, sets, reps, duration, calories, rating, muscle groups, and step-by-step instructions.
+## 📖 About The Project
 
-Personal Workout Plan
-Add workouts to today's plan, save workouts for later, mark completed workouts as done/undone, remove workouts, and track plan statistics such as exercises, total minutes, and calories.
+FITLOG provides a clean and interactive fitness experience where users can browse workouts, search and sort exercises, view detailed workout information, and create a personalized daily workout plan.
 
-📱 Responsive Design
+The project focuses on **responsive UI, reusable components, dynamic data handling, and an intuitive user experience**.
 
-FITLOG is designed to work across desktop, tablet, and mobile screen sizes. The layout adapts the workout library, search controls, workout details, and personal plan for smaller screens.
+---
 
-🚀 Live Demo
+## 🛠️ Technologies Used
 
-View FITLOG Live
+<table>
+  <tr>
+    <th>Technology</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td>⚡ <strong>Next.js 16</strong></td>
+    <td>React framework for building the application and handling routing</td>
+  </tr>
+  <tr>
+    <td>⚛️ <strong>React 19</strong></td>
+    <td>Building reusable and interactive UI components</td>
+  </tr>
+  <tr>
+    <td>🔷 <strong>TypeScript</strong></td>
+    <td>Type-safe and maintainable development</td>
+  </tr>
+  <tr>
+    <td>🎨 <strong>Tailwind CSS 4</strong></td>
+    <td>Responsive styling and modern interface design</td>
+  </tr>
+  <tr>
+    <td>✨ <strong>Lucide React</strong></td>
+    <td>Modern icons and interface elements</td>
+  </tr>
+  <tr>
+    <td>🌐 <strong>Fetch API / REST API</strong></td>
+    <td>Loading and displaying workout data dynamically</td>
+  </tr>
+  <tr>
+    <td>🖼️ <strong>Next.js Image</strong></td>
+    <td>Optimized workout image rendering</td>
+  </tr>
+</table>
 
-📂 Project Structure
+---
 
+## ✨ Key Features
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🏋️ 01 · Workout Library</h3>
+      <p>Browse a collection of workouts in a responsive card-based layout with useful exercise information and ratings.</p>
+    </td>
+    <td width="50%">
+      <h3>🔎 02 · Search Workouts</h3>
+      <p>Quickly find workouts by searching according to workout name, muscle group, or equipment.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>↕️ 03 · Workout Sorting</h3>
+      <p>Sort available workouts by duration, calories burned, or rating to find exercises that match your goals.</p>
+    </td>
+    <td width="50%">
+      <h3>📋 04 · Detailed Workout Pages</h3>
+      <p>Explore complete workout information including difficulty, equipment, sets, reps, duration, calories, muscle groups, and instructions.</p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <h3>📅 05 · Personal Workout Plan</h3>
+      <p>Create and manage today's workout plan. Add workouts, save exercises for later, mark workouts as completed or incomplete, remove exercises, and monitor plan statistics such as total exercises, minutes, and calories.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 📱 Responsive Design
+
+<p align="center">
+  💻 <strong>Desktop</strong> &nbsp; • &nbsp;
+  📱 <strong>Mobile</strong> &nbsp; • &nbsp;
+  📲 <strong>Tablet</strong>
+</p>
+
+FITLOG is designed to provide a smooth experience across different screen sizes. The workout library, search controls, workout details, and personal workout plan automatically adapt to smaller devices.
+
+---
+
+## 📂 Project Structure
+
+```text
 my-6th-assignment/
 ├── app/
 │   ├── my-plan/
@@ -56,6 +145,50 @@ my-6th-assignment/
 ├── types/
 ├── public/
 ├── package.json
+├── next.config.ts
 └── README.md
+```
 
-FITLOG — Find your workout. Build your plan. Get it done. 🏋️
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/nurjahan2420628-ctrl/my-6th-assignment.git
+```
+
+### 2. Open the project
+
+```bash
+cd my-6th-assignment
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Then open **http://localhost:3000** in your browser.
+
+---
+
+<div align="center">
+
+### 💪 FITLOG
+
+**Find your workout • Build your plan • Get it done**
+
+<br/>
+
+Made with ❤️ using Next.js, React, TypeScript & Tailwind CSS
+
+</div>
